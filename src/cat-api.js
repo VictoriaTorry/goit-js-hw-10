@@ -1,9 +1,6 @@
 export {fetchBreeds};
 export {fetchCatByBreed};
 
-import {creatingMarkUpForOneCat} from "./creatingMarkUp";
-
-
 function fetchBreeds(){
     return fetch('https://api.thecatapi.com/v1/breeds').then(resp=> {
         if(!resp.ok){
@@ -25,11 +22,5 @@ function fetchCatByBreed(breedId) {
           throw new Error(resp.statusText);
         }
         return resp.json()
-      })
-      .then(data => data.map(itemCat => {
-        return itemCat.breeds.map(breed => {
-          return creatingMarkUpForOneCat(itemCat.url, breed.description, breed.temperament);
-        }).join('');
-      }).join(''))
-      .catch(err => console.error(err));
+      }).catch(err => console.error(err))
   }
